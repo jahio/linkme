@@ -2,7 +2,7 @@ class CreateLinks < ActiveRecord::Migration[7.0]
   def change
     create_table :links, id: :uuid do |t|
       t.text            :url
-      t.bigint          :timestamp
+      t.bigint          :linktime # "timestamp" may be a reserved word...
       t.text            :token
       t.bigint          :visits
       t.datetime        :last_visit
@@ -13,9 +13,9 @@ class CreateLinks < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    # We need the combination of URL, timestamp, and token to be unique,
+    # We need the combination of URL, linktime, and token to be unique,
     # and that name can get a bit too long potentially, so...
-    add_index :links, [:url, :timestamp, :token], unique: true, name: 'links_are_unique'
+    add_index :links, [:url, :linktime, :token], unique: true, name: 'links_are_unique'
 
     # Create additional indices for faster lookup by singular granularity
     # TBH I'm not 100% certain if these are necessary for all databases or not with the above
@@ -24,7 +24,7 @@ class CreateLinks < ActiveRecord::Migration[7.0]
     # the side of caution, here we go. Would prefer to discuss this with a DBA under ideal
     # circumstances.
     add_index :links, :url
-    add_index :links, :timestamp
+    add_index :links, :linktime
     add_index :links, :token
 
     # These may not be strictly necessary but future reporting will definitely need this
