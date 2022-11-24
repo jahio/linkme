@@ -26,10 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_202335) do
     t.datetime "updated_at", null: false
     t.index ["creator_ip"], name: "index_links_on_creator_ip"
     t.index ["last_visit"], name: "index_links_on_last_visit"
-    t.index ["linktime"], name: "index_links_on_linktime"
-    t.index ["token"], name: "index_links_on_token"
     t.index ["url", "linktime", "token"], name: "links_are_unique", unique: true
-    t.index ["url"], name: "index_links_on_url"
     t.index ["visits"], name: "index_links_on_visits"
   end
 
