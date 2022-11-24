@@ -13,7 +13,7 @@ class Link < ApplicationRecord
   # 6. Couple it with the token to build the full URL
   # 7. Render the final short URL to the user, let frontend do the redirect
 
-  # Class method: Link.gen_shortlink(int): Given int, give me an encoded string
+  # Class method: Link.from_int(int): Given int, give me an encoded string
   # Delegates to private method encode_link under the hood. Essentially a proxy
   # to hide the private interface from the rest of the app for pseudo-security
   # purposes and future flexibility.
