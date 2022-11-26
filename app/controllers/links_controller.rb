@@ -18,7 +18,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     if @link.valid?
       @link.save
-      render json: @link.to_json
+      render json: @link.public_facing.to_json
     else
       render json: @link.errors.to_json, status: 400
     end

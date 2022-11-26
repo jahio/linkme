@@ -15,8 +15,10 @@ RSpec.describe "Links", type: :request do
         link = { url: Faker::Internet.url }
         headers = { "CONTENT_TYPE" => "application/json" }
         post "/", params: link.to_json, headers: headers
+        r = JSON.parse(response.body)
         expect(response.status).to be 200
-        expect(JSON.parse(response.body)["url"]).to eq link[:url]
+        expect(r["original_url"]).to eq link[:url]
+        expect(r["short_link"]).to_not be nil
       end
     end
   end

@@ -17,16 +17,26 @@ class Link < ApplicationRecord
 
   before_create :set_linktime # Sets off a chain of events if needed - see method comments below
 
-  # Class method: Link.from_int(int): Given int, give me an encoded string
-  # Delegates to private method encode_link under the hood. Essentially a proxy
-  # to hide the private interface from the rest of the app for pseudo-security
-  # purposes and future flexibility.
-  def self.from_int(i)
-    self.encode_link(i)
-  end
+  #
+  # public_facing
+  #
+  # Returns a hash of attributes for public consumption, consisting of the full shortened
+  # URL (short code plus token with delineator, if any), or errors, if any.
+  #
+  def public_facing
+    # Get the full shortened link - that means the encoded shortcode, plus the token if it
+    # exists, with a dot in the middle to delineate between the two.
+    short = encode_link(linktime)
 
-  def self.from_string(s)
-    self.decode_link(s)
+    if(token)
+      path = "#{short}.#{token}"
+    else
+      path = short
+    end
+
+    # The full, publicly-suitable hash of things for presentation:
+    return { original_url: url, short_link: "http://localhost:3000/#{path}" }
+    # TODO: Rip out that hardcoded proto, hostname and port, make those into config'd vars
   end
 
 private
@@ -45,25 +55,29 @@ private
     lt = (Time.now.utc.to_f * 1000).round
     if Link.where(linktime: lt).count > 0
       # Set a unique token as well
-      self.token = set_token(lt)
+      self.token = get_token(lt)
     end
     self.linktime = lt
   end
 
   #
-  # set_token
+  # get_token
   #
   # Given the passed in variable "lt" (linktime), look for the unique combination of links
   # that have that exact same linktime AND the token you're about to generate. Keep going until
   # you get a unique combination (shouldn't take long) and return the generated token.
   #
-  def set_token(lt)
+  def get_token(lt)
     x = 1 # set a control
     token = '' # Placeholder token
     while x > 0 do
-      # TODO: Loop logic
-      # Break out of loop
-      x = 2
+      # Generate a token, check for the combination of it AND the lt in the database, and if
+      # NOT found we're good to set that token and break out, otherwise keep going.
+      token = SecureRandom.hex(2)
+      if Link.where(linktime: lt, token: token).count == 0
+        # Break out of loop
+        x = 2
+      end
     end
     return token
   end
@@ -73,7 +87,7 @@ private
   # unusual results, including non-printing, non-ASCII characters!
   VALUES = (('a'..'z').to_a + ('A'..'Z').to_a + ((0..9).to_a.map! { |x| x.to_s })).freeze
 
-  def self.encode_link(i)
+  def encode_link(i)
     # Immediately bail out if i is zero
     if i == 0
       return VALUES[0]
@@ -86,7 +100,7 @@ private
     return str.reverse
   end
 
-  def self.decode_link(s)
+  def decode_link(s)
     i = 0
     s.each_char { |c| i = i * VALUES.length + VALUES.index(c) }
     return i
