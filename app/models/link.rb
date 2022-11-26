@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class Link < ApplicationRecord
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
@@ -13,6 +15,8 @@ class Link < ApplicationRecord
   # 6. Couple it with the token to build the full URL
   # 7. Render the final short URL to the user, let frontend do the redirect
 
+  before_create :set_linktime # Sets off a chain of events if needed - see method comments below
+
   # Class method: Link.from_int(int): Given int, give me an encoded string
   # Delegates to private method encode_link under the hood. Essentially a proxy
   # to hide the private interface from the rest of the app for pseudo-security
@@ -26,6 +30,43 @@ class Link < ApplicationRecord
   end
 
 private
+
+  #
+  # set_linktime
+  #
+  # Sets the UNIX timestamp, a float, multiplies that times one thousand for precision, then
+  # rounds that value to get an int. Then checks to see if there is even one of those already
+  # in the database with the same linktime - if even one exists, the bijective encode function
+  # will, by definition, create an identical shortcode, so we need to optionally add a token
+  # to it, which if that query produces even one result, we'll call that next. If not, it's
+  # just skipped.
+  #
+  def set_linktime
+    lt = (Time.now.utc.to_f * 1000).round
+    if Link.where(linktime: lt).count > 0
+      # Set a unique token as well
+      self.token = set_token(lt)
+    end
+    self.linktime = lt
+  end
+
+  #
+  # set_token
+  #
+  # Given the passed in variable "lt" (linktime), look for the unique combination of links
+  # that have that exact same linktime AND the token you're about to generate. Keep going until
+  # you get a unique combination (shouldn't take long) and return the generated token.
+  #
+  def set_token(lt)
+    x = 1 # set a control
+    token = '' # Placeholder token
+    while x > 0 do
+      # TODO: Loop logic
+      # Break out of loop
+      x = 2
+    end
+    return token
+  end
 
   # The map on the integers here is necessary so we get back actual STRINGS when that
   # series of indices in the array winds up getting referenced, otherwise you get some
