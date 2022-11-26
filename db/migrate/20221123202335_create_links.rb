@@ -15,7 +15,7 @@ class CreateLinks < ActiveRecord::Migration[7.0]
 
     # We need the combination of URL, linktime, and token to be unique,
     # and that name can get a bit too long potentially, so...
-    add_index :links, [:url, :linktime, :token], unique: true, name: 'links_are_unique'
+    add_index :links, [:url, :linktime, :token], unique: true, name: 'idx_links_are_unique'
 
     # These may not be strictly necessary but future reporting will definitely need this
     # so we might as well get it out of the way.
