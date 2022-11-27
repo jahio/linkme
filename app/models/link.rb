@@ -18,6 +18,32 @@ class Link < ApplicationRecord
   before_create :set_linktime # Sets off a chain of events if needed - see method comments below
 
   #
+  # find_via_path_string(path)
+  #
+  # Given a string like the following examples, decode the short link and find the original URL.
+  #
+  #      /Eg8v7X8.8ffb    =>    https://news.ycombinator.com
+  #      /22fbv8B         =>    https://rubyonrails.org
+  #      /asFbK2b.BBf6    =>    https://youtube.com/erb
+  #
+  # These are just made up examples to give you an overall idea.
+  #
+  def self.find_via_shortpath(x)
+    # By definition, our delineation suffixes are 4 characters, quite shorter than the normal
+    # shortened URL "root" portion, so we can bank on the shorter one being always the token.
+    # This will force the shortcode to always be the first element regardless; should normally
+    # be that way anyway, but why make assumptions when we can be certain?
+    path = x.split(".").sort_by { |s| -s.size } # [0] => the encoded linktime (decode this)
+                                                # [1] => the token (if there)
+    lt = self.decode_link(path[0])
+    if path.length > 1
+      return Link.where(linktime: lt, token: path[1]).limit(1).first
+    else
+      return Link.where(linktime: lt).limit(1).first
+    end
+  end
+
+  #
   # public_facing
   #
   # Returns a hash of attributes for public consumption, consisting of the full shortened
@@ -26,7 +52,7 @@ class Link < ApplicationRecord
   def public_facing
     # Get the full shortened link - that means the encoded shortcode, plus the token if it
     # exists, with a dot in the middle to delineate between the two.
-    short = encode_link(linktime)
+    short = self.class.encode_link(linktime)
 
     if(token)
       path = "#{short}.#{token}"
@@ -35,8 +61,7 @@ class Link < ApplicationRecord
     end
 
     # The full, publicly-suitable hash of things for presentation:
-    return { original_url: url, short_link: "http://localhost:3000/#{path}" }
-    # TODO: Rip out that hardcoded proto, hostname and port, make those into config'd vars
+    return { original_url: url, short_link: "#{ENV['RUNTIME_URI_BASE']}#{path}" }
   end
 
 private
@@ -52,7 +77,7 @@ private
   # just skipped.
   #
   def set_linktime
-    lt = (Time.now.utc.to_f * 1000).round
+    lt = (Time.now.to_f * 1000).round
     if Link.where(linktime: lt).count > 0
       # Set a unique token as well
       self.token = get_token(lt)
@@ -87,7 +112,7 @@ private
   # unusual results, including non-printing, non-ASCII characters!
   VALUES = (('a'..'z').to_a + ('A'..'Z').to_a + ((0..9).to_a.map! { |x| x.to_s })).freeze
 
-  def encode_link(i)
+  def self.encode_link(i)
     # Immediately bail out if i is zero
     if i == 0
       return VALUES[0]
@@ -100,7 +125,7 @@ private
     return str.reverse
   end
 
-  def decode_link(s)
+  def self.decode_link(s)
     i = 0
     s.each_char { |c| i = i * VALUES.length + VALUES.index(c) }
     return i

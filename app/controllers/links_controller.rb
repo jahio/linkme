@@ -34,6 +34,16 @@ class LinksController < ApplicationController
   # semantics, I'm gonna go ahead and call it that. Good 'nuff.
   #
   def show
+    # The stuff after the / in the user's URL box is called the "shortpath" and consists of
+    # the "shortcode" - the encoded unix timestamp - and optionally a token that may have
+    # been generated at the time of creation to avoid collision. Doesn't matter, the model
+    # handles all that crap, just shove it all in there.
+    @link = Link.find_via_shortpath(params[:shortpath])
+    if @link
+      render json: @link.public_facing.to_json
+    else
+      render json: { status: 404, error: "not found" }, status: 404
+    end
   end
 
 private
