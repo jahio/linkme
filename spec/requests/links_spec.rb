@@ -24,6 +24,19 @@ RSpec.describe "Links", type: :request do
         end
       end
       context "that DOES have a token" do
+        before :all do
+          @link = create(:link_with_token)
+          @headers = { "CONTENT_TYPE" => "application/json" }
+        end
+        it "retrieves an existing shortened URL object" do
+          pth = @link.public_facing[:short_link].gsub(ENV['RUNTIME_URI_BASE'], '').gsub(/\//, '')
+          get "/#{pth}", headers: @headers
+          r = JSON.parse(response.body)
+          expect(response.status).to be 200
+          expect(r["original_url"]).to eq @link[:url]
+          expect(r["short_link"]).to eq @link.public_facing[:short_link]
+          # TODO: check for visit count increase
+        end
       end
     end
   end

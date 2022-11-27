@@ -41,6 +41,7 @@ class LinksController < ApplicationController
     @link = Link.find_via_shortpath(params[:shortpath])
     if @link
       render json: @link.public_facing.to_json
+      # TODO: Update visit count
     else
       render json: { status: 404, error: "not found" }, status: 404
     end
