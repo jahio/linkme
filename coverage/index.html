@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2022-11-26T20:18:31-06:00">2022-11-26T20:18:31-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2022-11-26T22:29:29-06:00">2022-11-26T22:29:29-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  97.31%
+  96.3%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         3.87
+         3.9
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>186</b> relevant lines,
-    <span class="green"><b>181</b> lines covered</span> and
-    <span class="red"><b>5</b> lines missed. </span>
+    <b>189</b> relevant lines,
+    <span class="green"><b>182</b> lines covered</span> and
+    <span class="red"><b>7</b> lines missed. </span>
     (<span class="green">
-  97.31%
+  96.3%
 </span>
 )
   </div>
@@ -83,12 +83,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#8d80c1d674ff219676acdf5c189ac2a7337d1d73" class="src_link" title="app/controllers/links_controller.rb">app/controllers/links_controller.rb</a></td>
-            <td class="yellow strong cell--number t-file__coverage">86.67 %</td>
-            <td class="cell--number">56</td>
-            <td class="cell--number">15</td>
-            <td class="cell--number">13</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">1.07</td>
+            <td class="red strong cell--number t-file__coverage">77.78 %</td>
+            <td class="cell--number">63</td>
+            <td class="cell--number">18</td>
+            <td class="cell--number">14</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">1.00</td>
             
           </tr>
         
@@ -106,11 +106,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#5516b7f5276885b55facb5165fbd2c7d61bec36d" class="src_link" title="app/models/link.rb">app/models/link.rb</a></td>
             <td class="green strong cell--number t-file__coverage">95.74 %</td>
-            <td class="cell--number">142</td>
+            <td class="cell--number">145</td>
             <td class="cell--number">47</td>
             <td class="cell--number">45</td>
             <td class="cell--number">2</td>
-            <td class="cell--number">10.19</td>
+            <td class="cell--number">10.53</td>
             
           </tr>
         
@@ -342,8 +342,8 @@
   <div class="header">
     <h3>app/controllers/links_controller.rb</h3>
     <h4>
-      <span class="yellow">
-  86.67%
+      <span class="red">
+  77.78%
 </span>
 
       lines covered
@@ -352,9 +352,9 @@
     
 
     <div class="t-line-summary">
-      <b>15</b> relevant lines.
-      <span class="green"><b>13</b> lines covered</span> and
-      <span class="red"><b>2</b> lines missed.</span>
+      <b>18</b> relevant lines.
+      <span class="green"><b>14</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
     </div>
 
     
@@ -805,24 +805,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="41">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="41">
+            
             
 
             
 
-            <code class="ruby">    @link = Link.find_via_shortpath(params[:shortpath])</code>
+            <code class="ruby">    #</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="42">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="42">
+            
             
 
             
 
-            <code class="ruby">    if @link</code>
+            <code class="ruby">    # But first, check to see if this is an application/json request - if not, redirect</code>
           </li>
         </div>
       
@@ -833,45 +833,34 @@
 
             
 
-            <code class="ruby">      render json: @link.public_facing.to_json</code>
+            <code class="ruby">    if request.content_type != &#39;application/json&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="44">
+          <li class="missed" data-hits="0" data-linenumber="44">
             
             
 
             
 
-            <code class="ruby">      # TODO: Update visit count</code>
+            <code class="ruby">      redirect_to &quot;/?q=#{params[:shortpath]}&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
+          <li class="missed" data-hits="0" data-linenumber="45">
             
             
 
             
 
-            <code class="ruby">    else</code>
+            <code class="ruby">      return</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="46">
-            
-            
-
-            
-
-            <code class="ruby">      render json: { status: 404, error: &quot;not found&quot; }, status: 404</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="47">
+          <li class="never" data-hits="" data-linenumber="46">
             
             
 
@@ -882,18 +871,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="49">
+          <li class="never" data-hits="" data-linenumber="47">
             
             
 
@@ -904,13 +882,35 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="48">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">private</code>
+            <code class="ruby">    @link = Link.find_via_shortpath(params[:shortpath])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="49">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    if @link</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="50">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      render json: @link.public_facing.to_json</code>
           </li>
         </div>
       
@@ -921,29 +921,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">      # TODO: Update visit count</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="52">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="52">
+            
             
 
             
 
-            <code class="ruby">  def link_params</code>
+            <code class="ruby">    else</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="53">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="53">
+            
             
 
             
 
-            <code class="ruby">    params.require(:link).permit(:url)</code>
+            <code class="ruby">      render json: { status: 404, error: &quot;not found&quot; }, status: 404</code>
           </li>
         </div>
       
@@ -954,7 +954,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -965,12 +965,89 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="56">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="57">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="59">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def link_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="60">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    params.require(:link).permit(:url)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="61">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="62">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="63">
             
             
 
@@ -1769,13 +1846,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="64">
-            <span class="hits">7</span>
+          <li class="never" data-hits="" data-linenumber="64">
+            
             
 
             
 
-            <code class="ruby">    return { original_url: url, short_link: &quot;#{ENV[&#39;RUNTIME_URI_BASE&#39;]}#{path}&quot; }</code>
+            <code class="ruby">    # NOTE: We&#39;re relying on the environment variable to end in a slash here,</code>
           </li>
         </div>
       
@@ -1786,7 +1863,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    # so if it doesn&#39;t, we&#39;re going to be returning a malformed URL to the</code>
           </li>
         </div>
       
@@ -1797,18 +1874,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    # user! Double check that if you&#39;re having problems!</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="67">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="7" data-linenumber="67">
+            <span class="hits">7</span>
             
 
             
 
-            <code class="ruby">private</code>
+            <code class="ruby">    return { original_url: url, short_link: &quot;#{ENV[&#39;RUNTIME_URI_BASE&#39;]}#{path}&quot; }</code>
           </li>
         </div>
       
@@ -1819,7 +1896,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -1830,18 +1907,18 @@
 
             
 
-            <code class="ruby">  #</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="70">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="70">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  # set_linktime</code>
+            
+
+            <code class="ruby">private</code>
           </li>
         </div>
       
@@ -1852,7 +1929,7 @@
 
             
 
-            <code class="ruby">  #</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -1863,7 +1940,7 @@
 
             
 
-            <code class="ruby">  # Sets the UNIX timestamp, a float, multiplies that times one thousand for precision, then</code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
@@ -1874,7 +1951,7 @@
 
             
 
-            <code class="ruby">  # rounds that value to get an int. Then checks to see if there is even one of those already</code>
+            <code class="ruby">  # set_linktime</code>
           </li>
         </div>
       
@@ -1885,7 +1962,7 @@
 
             
 
-            <code class="ruby">  # in the database with the same linktime - if even one exists, the bijective encode function</code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
@@ -1896,7 +1973,7 @@
 
             
 
-            <code class="ruby">  # will, by definition, create an identical shortcode, so we need to optionally add a token</code>
+            <code class="ruby">  # Sets the UNIX timestamp, a float, multiplies that times one thousand for precision, then</code>
           </li>
         </div>
       
@@ -1907,7 +1984,7 @@
 
             
 
-            <code class="ruby">  # to it, which if that query produces even one result, we&#39;ll call that next. If not, it&#39;s</code>
+            <code class="ruby">  # rounds that value to get an int. Then checks to see if there is even one of those already</code>
           </li>
         </div>
       
@@ -1918,7 +1995,7 @@
 
             
 
-            <code class="ruby">  # just skipped.</code>
+            <code class="ruby">  # in the database with the same linktime - if even one exists, the bijective encode function</code>
           </li>
         </div>
       
@@ -1929,18 +2006,18 @@
 
             
 
-            <code class="ruby">  #</code>
+            <code class="ruby">  # will, by definition, create an identical shortcode, so we need to optionally add a token</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="79">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="79">
+            
             
 
             
 
-            <code class="ruby">  def set_linktime</code>
+            <code class="ruby">  # to it, which if that query produces even one result, we&#39;ll call that next. If not, it&#39;s</code>
           </li>
         </div>
       
@@ -1951,7 +2028,7 @@
 
             
 
-            <code class="ruby">    # Define precision default, override for test environments - in test,</code>
+            <code class="ruby">  # just skipped.</code>
           </li>
         </div>
       
@@ -1962,12 +2039,45 @@
 
             
 
+            <code class="ruby">  #</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="82">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def set_linktime</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="83">
+            
+            
+
+            
+
+            <code class="ruby">    # Define precision default, override for test environments - in test,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="84">
+            
+            
+
+            
+
             <code class="ruby">    # we want reduced precision for collision tests, but we want that higher</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="82">
+          <li class="never" data-hits="" data-linenumber="85">
             
             
 
@@ -1978,7 +2088,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="28" data-linenumber="83">
+          <li class="covered" data-hits="28" data-linenumber="86">
             <span class="hits">28</span>
             
 
@@ -1989,7 +2099,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="28" data-linenumber="84">
+          <li class="covered" data-hits="28" data-linenumber="87">
             <span class="hits">28</span>
             
 
@@ -2000,7 +2110,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="28" data-linenumber="85">
+          <li class="covered" data-hits="28" data-linenumber="88">
             <span class="hits">28</span>
             
 
@@ -2011,46 +2121,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="86">
+          <li class="never" data-hits="" data-linenumber="89">
             
             
 
             
 
             <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="87">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="28" data-linenumber="88">
-            <span class="hits">28</span>
-            
-
-            
-
-            <code class="ruby">    lt = (Time.now.to_f * precision).round</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="28" data-linenumber="89">
-            <span class="hits">28</span>
-            
-
-            
-
-            <code class="ruby">    if Link.where(linktime: lt).count &gt; 0</code>
           </li>
         </div>
       
@@ -2061,51 +2138,51 @@
 
             
 
-            <code class="ruby">      # Set a unique token as well</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="13" data-linenumber="91">
-            <span class="hits">13</span>
-            
-
-            
-
-            <code class="ruby">      self.token = get_token(lt)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="92">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="28" data-linenumber="93">
+          <li class="covered" data-hits="28" data-linenumber="91">
             <span class="hits">28</span>
             
 
             
 
-            <code class="ruby">    self.linktime = lt</code>
+            <code class="ruby">    lt = (Time.now.to_f * precision).round</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="94">
+          <li class="covered" data-hits="28" data-linenumber="92">
+            <span class="hits">28</span>
+            
+
+            
+
+            <code class="ruby">    if Link.where(linktime: lt).count &gt; 0</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="93">
             
             
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">      # Set a unique token as well</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="15" data-linenumber="94">
+            <span class="hits">15</span>
+            
+
+            
+
+            <code class="ruby">      self.token = get_token(lt)</code>
           </li>
         </div>
       
@@ -2116,18 +2193,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="96">
-            
-            
-
+          <li class="covered" data-hits="28" data-linenumber="96">
+            <span class="hits">28</span>
             
 
-            <code class="ruby">  #</code>
+            
+
+            <code class="ruby">    self.linktime = lt</code>
           </li>
         </div>
       
@@ -2138,7 +2215,7 @@
 
             
 
-            <code class="ruby">  # get_token</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -2149,7 +2226,7 @@
 
             
 
-            <code class="ruby">  #</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2160,7 +2237,7 @@
 
             
 
-            <code class="ruby">  # Given the passed in variable &quot;lt&quot; (linktime), look for the unique combination of links</code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
@@ -2171,7 +2248,7 @@
 
             
 
-            <code class="ruby">  # that have that exact same linktime AND the token you&#39;re about to generate. Keep going until</code>
+            <code class="ruby">  # get_token</code>
           </li>
         </div>
       
@@ -2182,7 +2259,7 @@
 
             
 
-            <code class="ruby">  # you get a unique combination (shouldn&#39;t take long) and return the generated token.</code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
@@ -2193,12 +2270,45 @@
 
             
 
+            <code class="ruby">  # Given the passed in variable &quot;lt&quot; (linktime), look for the unique combination of links</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="103">
+            
+            
+
+            
+
+            <code class="ruby">  # that have that exact same linktime AND the token you&#39;re about to generate. Keep going until</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="104">
+            
+            
+
+            
+
+            <code class="ruby">  # you get a unique combination (shouldn&#39;t take long) and return the generated token.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="105">
+            
+            
+
+            
+
             <code class="ruby">  #</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="103">
+          <li class="covered" data-hits="1" data-linenumber="106">
             <span class="hits">1</span>
             
 
@@ -2209,8 +2319,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="13" data-linenumber="104">
-            <span class="hits">13</span>
+          <li class="covered" data-hits="15" data-linenumber="107">
+            <span class="hits">15</span>
             
 
             
@@ -2220,8 +2330,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="13" data-linenumber="105">
-            <span class="hits">13</span>
+          <li class="covered" data-hits="15" data-linenumber="108">
+            <span class="hits">15</span>
             
 
             
@@ -2231,8 +2341,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="13" data-linenumber="106">
-            <span class="hits">13</span>
+          <li class="covered" data-hits="15" data-linenumber="109">
+            <span class="hits">15</span>
             
 
             
@@ -2242,7 +2352,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="107">
+          <li class="never" data-hits="" data-linenumber="110">
             
             
 
@@ -2253,7 +2363,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="108">
+          <li class="never" data-hits="" data-linenumber="111">
             
             
 
@@ -2264,8 +2374,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="13" data-linenumber="109">
-            <span class="hits">13</span>
+          <li class="covered" data-hits="15" data-linenumber="112">
+            <span class="hits">15</span>
             
 
             
@@ -2275,46 +2385,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="13" data-linenumber="110">
-            <span class="hits">13</span>
+          <li class="covered" data-hits="15" data-linenumber="113">
+            <span class="hits">15</span>
             
 
             
 
             <code class="ruby">      if Link.where(linktime: lt, token: token).count == 0</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="111">
-            
-            
-
-            
-
-            <code class="ruby">        # Break out of loop</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="13" data-linenumber="112">
-            <span class="hits">13</span>
-            
-
-            
-
-            <code class="ruby">        x = 0</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="113">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -2325,18 +2402,18 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">        # Break out of loop</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="13" data-linenumber="115">
-            <span class="hits">13</span>
+          <li class="covered" data-hits="15" data-linenumber="115">
+            <span class="hits">15</span>
             
 
             
 
-            <code class="ruby">    return token</code>
+            <code class="ruby">        x = 0</code>
           </li>
         </div>
       
@@ -2347,7 +2424,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -2358,18 +2435,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="118">
-            
-            
-
+          <li class="covered" data-hits="15" data-linenumber="118">
+            <span class="hits">15</span>
             
 
-            <code class="ruby">  # The map on the integers here is necessary so we get back actual STRINGS when that</code>
+            
+
+            <code class="ruby">    return token</code>
           </li>
         </div>
       
@@ -2380,7 +2457,7 @@
 
             
 
-            <code class="ruby">  # series of indices in the array winds up getting referenced, otherwise you get some</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -2391,18 +2468,18 @@
 
             
 
-            <code class="ruby">  # unusual results, including non-printing, non-ASCII characters!</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="11" data-linenumber="121">
-            <span class="hits">11</span>
+          <li class="never" data-hits="" data-linenumber="121">
+            
             
 
             
 
-            <code class="ruby">  VALUES = ((&#39;a&#39;..&#39;z&#39;).to_a + (&#39;A&#39;..&#39;Z&#39;).to_a + ((0..9).to_a.map! { |x| x.to_s })).freeze</code>
+            <code class="ruby">  # The map on the integers here is necessary so we get back actual STRINGS when that</code>
           </li>
         </div>
       
@@ -2413,12 +2490,45 @@
 
             
 
+            <code class="ruby">  # series of indices in the array winds up getting referenced, otherwise you get some</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="123">
+            
+            
+
+            
+
+            <code class="ruby">  # unusual results, including non-printing, non-ASCII characters!</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="124">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">  VALUES = ((&#39;a&#39;..&#39;z&#39;).to_a + (&#39;A&#39;..&#39;Z&#39;).to_a + ((0..9).to_a.map! { |x| x.to_s })).freeze</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="125">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="123">
+          <li class="covered" data-hits="1" data-linenumber="126">
             <span class="hits">1</span>
             
 
@@ -2429,7 +2539,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="124">
+          <li class="never" data-hits="" data-linenumber="127">
             
             
 
@@ -2440,7 +2550,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="125">
+          <li class="covered" data-hits="7" data-linenumber="128">
             <span class="hits">7</span>
             
 
@@ -2451,7 +2561,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="126">
+          <li class="missed" data-hits="0" data-linenumber="129">
             
             
 
@@ -2462,7 +2572,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="127">
+          <li class="never" data-hits="" data-linenumber="130">
             
             
 
@@ -2473,7 +2583,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="128">
+          <li class="covered" data-hits="7" data-linenumber="131">
             <span class="hits">7</span>
             
 
@@ -2484,7 +2594,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="129">
+          <li class="covered" data-hits="7" data-linenumber="132">
             <span class="hits">7</span>
             
 
@@ -2495,7 +2605,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="49" data-linenumber="130">
+          <li class="covered" data-hits="49" data-linenumber="133">
             <span class="hits">49</span>
             
 
@@ -2506,7 +2616,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="49" data-linenumber="131">
+          <li class="covered" data-hits="49" data-linenumber="134">
             <span class="hits">49</span>
             
 
@@ -2517,7 +2627,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="132">
+          <li class="never" data-hits="" data-linenumber="135">
             
             
 
@@ -2528,7 +2638,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="133">
+          <li class="covered" data-hits="7" data-linenumber="136">
             <span class="hits">7</span>
             
 
@@ -2539,7 +2649,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="134">
+          <li class="never" data-hits="" data-linenumber="137">
             
             
 
@@ -2550,7 +2660,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="135">
+          <li class="never" data-hits="" data-linenumber="138">
             
             
 
@@ -2561,7 +2671,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="136">
+          <li class="covered" data-hits="1" data-linenumber="139">
             <span class="hits">1</span>
             
 
@@ -2572,7 +2682,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="137">
+          <li class="covered" data-hits="2" data-linenumber="140">
             <span class="hits">2</span>
             
 
@@ -2583,7 +2693,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="16" data-linenumber="138">
+          <li class="covered" data-hits="16" data-linenumber="141">
             <span class="hits">16</span>
             
 
@@ -2594,7 +2704,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="139">
+          <li class="covered" data-hits="2" data-linenumber="142">
             <span class="hits">2</span>
             
 
@@ -2605,7 +2715,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="140">
+          <li class="never" data-hits="" data-linenumber="143">
             
             
 
@@ -2616,7 +2726,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="141">
+          <li class="never" data-hits="" data-linenumber="144">
             
             
 
@@ -2627,7 +2737,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="142">
+          <li class="never" data-hits="" data-linenumber="145">
             
             
 
