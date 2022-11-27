@@ -38,6 +38,13 @@ class LinksController < ApplicationController
     # the "shortcode" - the encoded unix timestamp - and optionally a token that may have
     # been generated at the time of creation to avoid collision. Doesn't matter, the model
     # handles all that crap, just shove it all in there.
+    #
+    # But first, check to see if this is an application/json request - if not, redirect
+    if request.content_type != 'application/json'
+      redirect_to "/?q=#{params[:shortpath]}"
+      return
+    end
+
     @link = Link.find_via_shortpath(params[:shortpath])
     if @link
       render json: @link.public_facing.to_json

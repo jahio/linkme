@@ -61,6 +61,9 @@ class Link < ApplicationRecord
     end
 
     # The full, publicly-suitable hash of things for presentation:
+    # NOTE: We're relying on the environment variable to end in a slash here,
+    # so if it doesn't, we're going to be returning a malformed URL to the
+    # user! Double check that if you're having problems!
     return { original_url: url, short_link: "#{ENV['RUNTIME_URI_BASE']}#{path}" }
   end
 

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+    <script>
+      const el = document.getElementById('shortcode');
+      const sp = new URLSearchParams(window.location.search);
+      el.innerHTML = sp.get('q');
+    </script>
+  </head>
+  <body>
+    Your original request was for shortcode: <div id="shortcode"></div>
+  </body>
+</html>
