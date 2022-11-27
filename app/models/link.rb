@@ -77,7 +77,15 @@ private
   # just skipped.
   #
   def set_linktime
-    lt = (Time.now.to_f * 1000).round
+    # Define precision default, override for test environments - in test,
+    # we want reduced precision for collision tests, but we want that higher
+    # in dev/prod for realistic runtime experience.
+    precision = 1000
+    if ENV['RAILS_ENV'] == 'test'
+      precision = 100
+    end
+
+    lt = (Time.now.to_f * precision).round
     if Link.where(linktime: lt).count > 0
       # Set a unique token as well
       self.token = get_token(lt)
@@ -101,7 +109,7 @@ private
       token = SecureRandom.hex(2)
       if Link.where(linktime: lt, token: token).count == 0
         # Break out of loop
-        x = 2
+        x = 0
       end
     end
     return token
