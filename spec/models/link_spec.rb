@@ -18,6 +18,27 @@ RSpec.describe Link, type: :model do
       it 'corresponds to UNIX time/linktime property' do
       end
       it 'has a randomized token affixed to compensate for collision probability' do
+        # In this case, imagine we've got a lot of traffic and tons of people creating
+        # shortened URLs simultaneously. We want to be sure that there isn't a collision,
+        # and we don't want URLs getting unnecessarily lengthy if they don't have to,
+        # so we only append a token if we absolutely HAVE to do so.
+        #
+        # To simulate this, we'll just tell Rails to create a ton of basic Link objects
+        # all at the same time. In theory, they should all have tokens affixed in spite
+        # of the fact that we didn't tell it to do that - it should happen automatically.
+        #
+        # Start by establishing the number of links in the database with a token attached.
+        num_tokens = Link.where("token IS NOT NULL").count
+
+        # Create dummy objects wicked fast - with threads!
+        threads = []
+        25.times do
+          threads << Thread.new { link = create(:link) }
+        end
+        threads.each { |t| t.join }
+
+        # Now check - is that number unchanged?
+        expect(Link.where("token IS NOT NULL").count).to be > num_tokens
       end
     end
   end
