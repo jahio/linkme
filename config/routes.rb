@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  post "/", to: 'links#create'
-  get "/:shortpath", to: 'links#show'
+  post "/links", to: 'links#create'
+  get "/links/:shortpath", to: 'links#show'
 end

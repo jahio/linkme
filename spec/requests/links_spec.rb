@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Links", type: :request do
-  describe "GET /shortpath" do
+  describe "GET /links/shortpath" do
     context "with an existing valid shortpath" do
       context "that does NOT have a token" do
         before :all do
@@ -15,7 +15,7 @@ RSpec.describe "Links", type: :request do
         it "retrieves an existing shortened url object" do
           # Get the encoded URL from the public-facing hash and discard trailing slashes, if any
           pth = @link.public_facing[:short_link].gsub(ENV['RUNTIME_URI_BASE'], '').gsub(/\//, '')
-          get "/#{pth}", headers: @headers
+          get "/links/#{pth}", headers: @headers
           r = JSON.parse(response.body)
           expect(response.status).to be 200
           expect(r["original_url"]).to eq @link[:url]
@@ -30,7 +30,7 @@ RSpec.describe "Links", type: :request do
         end
         it "retrieves an existing shortened URL object" do
           pth = @link.public_facing[:short_link].gsub(ENV['RUNTIME_URI_BASE'], '').gsub(/\//, '')
-          get "/#{pth}", headers: @headers
+          get "/links/#{pth}", headers: @headers
           r = JSON.parse(response.body)
           expect(response.status).to be 200
           expect(r["original_url"]).to eq @link[:url]
@@ -40,7 +40,7 @@ RSpec.describe "Links", type: :request do
       end
     end
   end
-  describe "POST /" do
+  describe "POST /links" do
     context "with invalid data consisting of" do
       context "...incomplete link specification" do
       end
@@ -53,7 +53,7 @@ RSpec.describe "Links", type: :request do
       it "creates the link object then renders JSON back for the link object created" do
         link = { url: Faker::Internet.url }
         headers = { "CONTENT_TYPE" => "application/json" }
-        post "/", params: link.to_json, headers: headers
+        post "/links", params: link.to_json, headers: headers
         r = JSON.parse(response.body)
         expect(response.status).to be 200
         expect(r["original_url"]).to eq link[:url]
