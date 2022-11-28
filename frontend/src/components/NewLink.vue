@@ -14,20 +14,24 @@
     name: 'NewLink',
     data() {
       return {
-        original_url: '',
-        short_link: '',
-        shortpath: ''
+        original_url: null,
+        short_link: null,
+        shortpath: null,
+        error: null
       }
     },
     methods: {
       onSubmit() {
         LinkService.create(this.original_url).then(response => {
-          console.log(response.data)
           this.short_link = response.data.short_link
           this.shortpath = response.data.shortpath
+          console.log(response.data)
+          // Sort of a hack, but feasibility...
+          // Redirect to the location for the shortened link
+          window.location.replace(`${window.location.origin}/${this.shortpath}`)
         })
         .catch(error => {
-          console.log(error)
+          console.log(error) // TODO: Formal error-handling presented to the user
         })
       }
     }
