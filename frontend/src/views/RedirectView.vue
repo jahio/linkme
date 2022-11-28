@@ -8,7 +8,7 @@
 <script>
 // @ is an alias to /src
 import ExistingLink from '@/components/ExistingLink.vue'
-import axios from 'axios'
+import LinkService from '@/services/LinkService.js'
 
 export default {
   name: 'RedirectView',
@@ -21,9 +21,7 @@ export default {
     }
   },
   created() {
-    axios.defaults.headers.common['Content-Type'] = 'application/json'
-    axios.defaults.headers.common['Accept'] = 'application/json'
-    axios.get("http://localhost:3000/links/SHORTCODE").then(response => {
+    LinkService.get(this.$route.params.shortpath).then(response => {
       console.log('events:', response.data)
     })
     .catch(error => {
