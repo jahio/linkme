@@ -27,6 +27,28 @@ be rails s
 
 That'll start the API server.
 
+### Frontend
+
+```
+cd <this repo>/frontend
+npm install
+npm run serve
+```
+
+Now if you open a browser to the place it tells you in your terminal (should be localhost:8080), you should get a
+minimal interface that allows you to create a link. **Requires JavaScript**. Uses Vue.js v3 on the front-end for an SPA.
+I did this only as a "demo of capabilities", would probably not architect an app this way in the real world if I could avoid doing so,
+but who really _can_ avoid JavaScript in 2022?
+
+## RTFM
+
+1. Fire up both the API and the frontend, then visit the frontend in a browser tab
+1. Enter a valid URL in the box and hit enter
+1. You'll be redirected to the overview page _at the URL shortener_ that will describe/warn you where you're about to be redirected. After 5 seconds, said redirection will take place via JS.
+
+I did it this way so that the end user gets a "fair warning" should they get sent a link to a malicious website/domain via link shortner at some point. If you're tired of
+being rickrolled, this one's for you.
+
 ## Discussion
 
 There are a few different approaches that could be tried here. Each has pros and cons.
