@@ -36,9 +36,9 @@
         this.shortpath = response.data.shortpath
         // Set a timeout and then when finished, redirect to the location.
         // Five seconds.
-        setTimeout(()=> {
-          window.location.replace(this.original_url)
-        }, 5000)
+        // setTimeout(()=> {
+        //   window.location.replace(this.original_url)
+        // }, 5000)
       })
       .catch(error => {
         console.log(error)
